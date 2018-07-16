@@ -1,1 +1,1 @@
-export { FormItem, FormContainer, FormOption } from './src/'
+export { FormItem, FormContainer, FormOption, FormItemHOC } from './src/'
