@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { Form, Select, Input } from 'igroot'
 
 const { Item } = Form 
-const formItemLayout = {
+const defaultFormItemLayout = {
   labelCol: {
     xs: {
       span: 24
@@ -62,15 +62,16 @@ export class FormItem extends Component {
   }
 
   render() {
-    const { label, name, form } = this.props 
+    const { label, name, form, formItemLayout } = this.props 
 
     if (!form ) return this.props.children
 
     const { getFieldDecorator } = form 
+    const newFormItemLayout = formItemLayout || defaultFormItemLayout
     const fieldProps = this.getFieldProps() 
     
     return (
-      <Item {...formItemLayout} label={label}>
+      <Item {...newFormItemLayout} label={label}>
       {
         React.Children.map(this.props.children, child => {
           const Child = React.cloneElement(child)
