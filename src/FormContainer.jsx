@@ -19,6 +19,8 @@ function renderChildren(props, form) {
   })
 }
 
+const KEY_ENTER = 13
+
 /**
  * FormContainer Component
  */
@@ -44,14 +46,25 @@ export default class FormContainer extends Component {
     onGetForm && onGetForm(form)
   }
 
+  handleKeyDown = (e) => {
+    const { form, onSubmit } = this.props 
+    
+    if (e.keyCode === KEY_ENTER) {
+      form.validateFields((err, values) => {
+        if (!err) {
+          onSubmit && onSubmit(values)
+        }
+      })
+    }
+  }
+
   render() {
     const { form } = this.props 
 
     return (
-      <Form>
+      <Form  onKeyDown={this.handleKeyDown}>
         {renderChildren(this.props, form)}
       </Form>
     )
   }
-
 }
